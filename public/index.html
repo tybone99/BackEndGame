@@ -1,0 +1,97 @@
+<html ng-app="myApp">
+<head>
+  <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+  <link href="node_modules/angular-jk-carousel/dist/jk-carousel.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="css/css.css">
+  <title>Portal Battlers Online</title>
+</head>
+
+<body ng-cloak>
+
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-animate/angular-animate.js"></script>
+<script src="node_modules/angular-aria/angular-aria.js"></script>
+<script src="node_modules/angular-messages/angular-messages.js"></script>
+<script src="node_modules/angular-material/angular-material.js"></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
+<script src="node_modules/angular-jk-carousel/dist/jk-carousel.js"></script>
+<script src="node_modules/angularjs-scroll-glue/src/scrollglue.js"></script>
+
+
+<!-- Firebase    -->
+<script src="node_modules/firebase/firebase.js"></script>
+<!-- AngularFire -->
+<script src="node_modules/angularfire/dist/angularfire.min.js"></script>
+
+
+<!--other injections/ scripts-->
+<script src="scripts/app.js"></script>
+<script src="scripts/firebaseConfig.js"></script>
+<script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
+
+<!--Services-->
+<script src="scripts/services/character.service.js"></script>
+<script src="scripts/services/player.service.js"></script>
+<script src="scripts/services/feature.service.js"></script>
+<script src="scripts/services/gravatar.service.js"></script>
+<script src="scripts/services/ability.service.js"></script>
+<script src="scripts/services/enemyNPC.service.js"></script>
+<script src="scripts/services/battle.service.js"></script>
+<!--/Services-->
+
+<!--Components-->
+<script src="scripts/components/home.component.js"></script>
+<script src="scripts/components/playerInfo.component.js"></script>
+<script src="scripts/components/enemySelect.component.js"></script>
+<script src="scripts/components/battle.component.js"></script>
+<!--/Components-->
+
+
+<md-toolbar class="md-hue-2" ng-controller="AppCtrl as ctrl">
+  <div class="md-toolbar-tools">
+
+    <h2>
+      <span ui-sref="main" class="game-title">Portal Battlers Online</span>
+    </h2>
+    <span flex=""></span> <!-- Used to push the login button to the right -->
+    <md-button ng-if="!playerService.firebaseUser" aria-label="Login" class="md-primary md-raised" ng-click="showAdvanced($event)">
+      Login
+    </md-button>
+    <md-menu ng-if="playerService.firebaseUser">
+      <md-button aria-label="open player menu" ng-click="openNameMenu($mdOpenMenu, $event)">
+        {{playerService.getDisplayName()}}
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ng-click="" ui-sref="playerInfo">
+            <md-icon md-svg-icon="" md-menu-align-target=""></md-icon>
+            Player Info
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="" ui-sref="enemySelect">
+            <md-icon md-svg-icon=""></md-icon>
+            Battle
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-click="playerService.logout();">
+            <md-icon md-svg-icon=""></md-icon>
+            Sign Out
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>
+
+
+<ui-view></ui-view>
+
+
+</body>
+</html>

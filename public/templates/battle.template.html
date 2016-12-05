@@ -1,0 +1,79 @@
+<md-content class="md-padding">
+  <!--All Character stats-->
+  <div layout="column" layout-wrap layout-gt-sm="row" ng-cloak>
+    <div flex-gt-sm="50">
+      <md-card flex>
+        <md-card-header>
+          <md-card-avatar>
+            <img class="md-user-avatar" ng-src="{{vm.gravatarService.get_gravatar_image_url(vm.playerService.user.email)}}">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{vm.character.charName}}</span>
+            <span class="md-subhead">Level: {{vm.character.level}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <!-- Character's health here -->
+          <p>Player's Health</p>
+          <div class="progress">
+            <div class="progress-bar" ng-style="{'width': ((vm.characterHP/vm.character.maxHealth)*100).toFixed(0)+'%'}">
+              <div id="playerHealthLabel">{{((vm.characterHP/vm.character.maxHealth)*100).toFixed(0)}}%</div>
+            </div>
+          </div>
+          <md-list class="md-dense" flex>
+            <md-list-item ng-repeat="ability in vm.characterAbilitiesObjs" class="md-3-line" ng-click="vm.playerAttack(ability);">
+              <img ng-src="{{'images/abilities/' + ability.img}}" class="md-avatar" alt="{{ability.abilityName}}">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ability.abilityName}}</h3>
+                <h4>Level: {{ability.level}}</h4>
+                <p>Damage: {{ability.minEffect}} - {{ability.maxEffect}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-card-content>
+        <!--<md-card-actions layout="column" layout-align="start">
+          <md-button ui-sref="enemySelect" ng-click="vm.flee();">Flee</md-button>
+        </md-card-actions>-->
+      </md-card>
+    </div>
+    <div flex-gt-sm="50">
+      <md-card flex>
+        <md-card-header>
+          <md-card-avatar>
+            <img class="md-user-avatar" ng-src="images/enemies/{{vm.enemy.img}}">
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{vm.enemy.enemyName}}</span>
+            <span class="md-subhead">Level: {{vm.enemy.level}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+          <!-- Character's health here -->
+          <p>Enemies's health</p>
+          <div class="progress">
+            <div class="progress-bar" ng-style="{'width': ((vm.enemyHP/vm.enemy.maxHealth)*100).toFixed(0)+'%'}">
+              <div id="enemyHealthLabel">{{((vm.enemyHP/vm.enemy.maxHealth)*100).toFixed(0)}}%</div>
+            </div>
+          </div>
+          <md-list class="md-dense" flex>
+            <md-list-item ng-repeat="ability in vm.enemyAbilitiesObjs" class="md-3-line">
+              <img ng-src="{{'images/abilities/' + ability.img}}" class="md-avatar" alt="{{ability.abilityName}}">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ability.abilityName}}</h3>
+                <h4>Level: {{ability.level}}</h4>
+                <p>Damage: {{ability.minEffect}} - {{ability.maxEffect}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-card-content>
+
+      </md-card>
+    </div>
+  </div>
+  <md-card class="md-padding">
+    <md-input-container>
+      <label>Battle Log:</label>
+      <textarea id="battleLog" md-no-autogrow rows="5" max-rows="5" readonly >{{vm.battleLog}}</textarea>
+    </md-input-container>
+  </md-card>
+</md-content>

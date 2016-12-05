@@ -1,0 +1,38 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.player-gravater-img {
+    border-radius: 5% 5%;
+}
+.game-title {
+    cursor: pointer;
+}
+.card-media {
+    background-color: #999999;
+}
+.progress {
+    position: relative;
+    padding: 4px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.progress-bar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
+    background-color: #f63a0f;
+}
+#playerHealthLabel, #enemyHealthLabel {
+    text-align: center; /* If you want to center it */
+    line-height: 30px; /* Set the line-height to the same as the height of the progress bar container, to center it vertically */
+    color: white;
+}

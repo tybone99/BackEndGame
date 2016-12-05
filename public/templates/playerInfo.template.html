@@ -1,0 +1,117 @@
+<md-card>
+  <md-card-content>
+
+    <div layout="row">
+      <!--player img/ name-->
+      <div flex="10">
+        <img ng-src="{{vm.gravatarService.get_gravatar_image_url(vm.playerService.user.email)}}" class="player-gravater-img" alt="Player Gravatar">
+        <p>We use <a href="http://www.gravatar.com">Gravatars</a> for players</p>
+      </div>
+      <div flex="" layout="column">
+        <div flex="">
+          <!--Player Name-->
+          Player Name: {{vm.playerService.user.displayName}}<br />
+          <!--Character Name-->
+          <span ng-show="!vm.charNameEdit">Character: {{vm.selectedCharacter.charName}} <md-icon class="material-icons"  ng-click="vm.charNameEdit = true;">mode_edit</md-icon></span>
+          <form name="form" ng-show="vm.charNameEdit" ng-submit="vm.saveCharacterName();">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Character Name</label>
+              <input name="characterName" ng-model="vm.characterName" required ng-pattern="/^[a-zA-Z]+$/" minlength="3" maxlength="20" md-maxlength="20" ng-trim="true">
+              <div ng-messages="form.characterName.$error" role="alert" multiple md-auto-hide="false">
+                <div ng-message="required">You must supply a name</div>
+                <div ng-message="pattern">Names can only contain upper and lowercase alpha characters</div>
+                <div ng-message="maxlength">Names can be a maximum of 20 characters</div>
+                <div ng-message="minlength">Names must be at least 3 characters</div>
+              </div>
+            </md-input-container>
+            <div>
+              <md-button class="md-raised" ng-click="vm.charNameEdit = false; vm.characterName = vm.selectedCharacter.charName;">Cancel</md-button>
+              <md-button ng-disabled="form.characterName.$invalid" type="submit" class="md-raised md-primary">Save</md-button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="My Character Stats">
+          <md-content class="md-padding" layout-xs="column" layout="row">
+            <md-card flex-gt-xs="50">
+              <md-card-header>
+                <md-card-header-text>
+                  <span class="md-headline">Character Stats</span>
+                </md-card-header-text>
+              </md-card-header>
+              <md-card-content>
+                <p>
+                  Name: {{vm.selectedCharacter.charName}}<br />
+                  Level: {{vm.selectedCharacter.level}}<br />
+                  Experience: {{vm.selectedCharacter.exp}}<br />
+                  Max HP: {{vm.selectedCharacter.maxHealth}}<br />
+                  Abilities:
+                </p>
+                <md-list class="md-dense" flex>
+                  <md-list-item ng-repeat="ability in vm.selectedCharacterAbilitiesObjs" class="md-3-line">
+                    <img ng-src="{{'images/abilities/' + ability.img}}" class="md-avatar" alt="{{ability.abilityName}}">
+                    <div class="md-list-item-text" layout="column">
+                      <h3>{{ability.abilityName}}</h3>
+                      <h4>Level: {{ability.level}}</h4>
+                      <p>Damage: {{ability.minEffect}} - {{ability.maxEffect}}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </md-card-content>
+            </md-card>
+            <md-card flex-gt-xs="50">
+              <md-card-header>
+                <md-card-header-text>
+                  <span class="md-headline">Battle Stats</span>
+                </md-card-header-text>
+              </md-card-header>
+              <md-card-content>
+                <p>
+                  Total Matches: {{vm.selectedCharacter.wins + vm.selectedCharacter.losses}} <br />
+                  Rating: {{vm.selectedCharacter.rating}} <br />
+                  Wins: {{vm.selectedCharacter.wins}} <br />
+                  Losses: {{vm.selectedCharacter.losses}} <br />
+                </p>
+              </md-card-content>
+            </md-card>
+          </md-content>
+        </md-tab>
+        <md-tab label="Top Character Stats">
+          <md-content class="md-padding" layout-xs="column" layout="row">
+            <!--All Character stats-->
+            <md-card ng-repeat="character in vm.topCharacters | orderBy:'-rating'" flex="">
+              <md-card-header>
+                <md-card-avatar>
+                  <img ng-src="{{vm.charUrl[$index]}}" alt="player gravatar icon"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                  <span class="md-title">{{character.charName}} <br /></span>
+                  <span class="md-subhead">Rating: {{character.rating}} <br /></span>
+                </md-card-header-text>
+              </md-card-header>
+              <md-card-content>
+                Total Matches: {{character.wins + character.losses}} <br />
+                Wins: {{character.wins}} <br />
+                Losses: {{character.losses}} <br />
+              </md-card-content>
+            </md-card>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </div>
+  </md-card-content>
+
+  <md-card-actions layout="row" layout-align="center center">
+    <md-button ui-sref="enemySelect">Fight!</md-button>
+  </md-card-actions>
+</md-card>
+<!--my stats-->
+
+
+<!--top players-->
+
+
+<!--battle-->

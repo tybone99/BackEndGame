@@ -1,0 +1,53 @@
+<md-content class="md-padding">
+  <md-card layout="column" layout-align="center center" style="padding-bottom: 10px; padding-top: 10px;">
+    <jk-carousel
+        data="vm.dataArray"
+        item-template-url="'templates/item.template.html'"
+        max-width="800"
+        max-height="277"
+        auto-slide="true"
+        auto-slide-time="3000">
+    </jk-carousel>
+  </md-card>
+  <md-card layout="column">
+      <md-card-header>
+        <md-card-header-text>
+          <span class="md-title">Description</span>
+          <span class="md-subhead">MATC Spring 2016 Group Web Game</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <md-list flex="">
+          <md-subheader class="md-no-sticky">Features</md-subheader>
+          <md-list-item class="md-2-line" ng-repeat="feature in vm.features">
+            <img ng-src="{{'images/features/'+feature.image}}" class="md-avatar" alt="{{feature.title}}"/>
+            <div class="md-list-item-text">
+              <h4>{{feature.title}}</h4>
+              <p>{{feature.description}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+        <md-list flex="">
+          <md-subheader class="md-no-sticky">Team Members</md-subheader>
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h4>Ty Thornton</h4>
+              <p>Front-end, enemy NPC design</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h4>Garrett Brinkman</h4>
+              <p>Front-end, enemy NPC design</p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h4>Andre Morales</h4>
+              <p>Firebase, Back-end services, Front-end</p>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+  </md-card>
+</md-content>
